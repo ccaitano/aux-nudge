@@ -13,5 +13,5 @@ fetch(lyricsAPI, options)
 	.then(response => console.log(response))
 	.catch(err => console.error(err));
 }
-var keyword = "Hello"
+var keyword = "accupuncture"
 testAPI(keyword);
