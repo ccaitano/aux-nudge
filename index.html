@@ -13,17 +13,16 @@
   </head>
   <body>
     <!-- Header -->
-    <section class="hero is-medium is-link">
-      <div class="hero-body">
-        <p class="title">Aux Nudge</p>
-        <p class="subtitle">Search for songs you want to play...</p>
+    <section class="hero is-medium" >
+      <div class="hero-body" id="header">
+        <p class="title is-size-1">Aux Nudge</p>
+        <p class="subtitle is-italic">Search for songs you want to play...</p>
       </div>
     </section>
     <!-- Directions for Website Use -->
     <div class="container is-fluid">
-      <div class="notification">
-        This container is <strong>fluid</strong>: it will have a 32px gap on
-        either side, on any viewport size.
+      <div class="notification my-5 is-italic">
+        Don't know what song you want to listen to? Type a word into the search bar and we will get you started.
       </div>
     </div>
     <div class="container is-fluid">
@@ -33,13 +32,13 @@
           <div class="field has-addons">
             <label class="label"></label>
             <div class="control">
-              <input class="input" type="text" placeholder="Enter Word" />
+              <input class="input" id ="search-bar" type="text" placeholder="Enter Word" />
             </div>
           <div class="control">
             <button class="button is-dark" id="search-button">Search</button>
           </div>
         </div>
-          <p>Don't know what to search? Generate a random word</p>
+          <p class ="block notification is-italic"> Don't know what to search? Generate a random word</p>
           <button class="button is-dark" id="random-button">
             Generate Random Word
           </button>

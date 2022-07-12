@@ -1,0 +1,62 @@
+
+
+:root {
+    --dark:  #333533;
+    --light: #E8EDDF;
+    --accent: #C492B1;
+}
+
+* {
+    background-color: var(--accent);
+}
+
+/* Header Container */
+#header {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+.title {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+.subtitle {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+
+/* directions container */
+
+.notification {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+
+
+/* Seach bar  */
+#search-bar {
+
+}
+
+#search-button {
+
+}
+
+/* random generate button */
+#random-button {
+
+}
+
+/* Search results container */
+#search-results {
+
+}
+
+/* saved results container */
+#saved-tracks {
+
+}
+
