@@ -1,37 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AuxNudge</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <!-- Header -->
     <section class="hero is-medium is-link">
-        <div class="hero-body">
-          <p class="title">
-            Aux Nudge
-          </p>
-          <p class="subtitle">
-            Search for songs you want to play...
-          </p>
-        </div>
-      </section>
-      <div class="container is-fluid">
-        <div class="notification">
-          This container is <strong>fluid</strong>: it will have a 32px gap on either side, on any
-          viewport size.
-        </div>
+      <div class="hero-body">
+        <p class="title">Aux Nudge</p>
+        <p class="subtitle">Search for songs you want to play...</p>
       </div>
-      <div class="container is-fluid">
-        <div class="columns">
-            <div class="column is-one-third">is-four-fifths</div>
-            <div class="column is-two-thirds">Auto</div>
-            <div class="column">Auto</div>
+    </section>
+    <!-- Directions for Website Use -->
+    <div class="container is-fluid">
+      <div class="notification">
+        This container is <strong>fluid</strong>: it will have a 32px gap on
+        either side, on any viewport size.
+      </div>
+    </div>
+    <div class="container is-fluid">
+      <div class="columns">
+        <!-- Search For Area -->
+        <div class="column is-one-third">
+          <div class="field has-addons">
+            <label class="label"></label>
+            <div class="control">
+              <input class="input" type="text" placeholder="Enter Word" />
+            </div>
           </div>
+          <div class="control">
+            <button class="button is-dark" id="search-button">Search</button>
+          </div>
+          <p>Don't know what to search? Generate a random word</p>
+          <button class="button is-dark" id="random-button">
+            Generate Random Word
+          </button>
+        </div>
+        <!-- Search Results Song List -->
+        <div class="column is-two-thirds" id="search-results">
+          Search Results will display here...
+        </div>
       </div>
+    </div>
+    <!-- Saved Tracks Container -->
+    <div class="container is-fluid" id="saved-tracks">
+      Saved Tracks will display here...
+    </div>
     <script src="./js/script.js"></script>
-</body>
+  </body>
 </html>
