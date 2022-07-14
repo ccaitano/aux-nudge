@@ -15,17 +15,17 @@
     <!-- Header -->
     <section class="hero is-medium" >
       <div class="hero-body" id="header">
-        <p class="title is-size-1">Aux Nudge</p>
-        <p class="subtitle is-italic">Search for songs you want to play...</p>
+        <p class="schemedark title is-size-1 heavy">Aux Nudge</p>
+        <p class="schemedark subtitle is-italic">Search for songs you want to play...</p>
       </div>
     </section>
     <!-- Directions for Website Use -->
     <div class="container is-fluid">
-      <div class="notification my-5 is-italic">
+      <div class="schemedark notification my-5 is-italic">
         Don't know what song you want to listen to? Type a word into the search bar and we will get you started.
       </div>
     </div>
-    <div class="container is-fluid">
+    <div class="container is-fluid block">
       <div class="columns">
         <!-- Search For Area -->
         <div class="column is-one-third">
@@ -38,20 +38,69 @@
             <button class="button is-dark" id="search-button">Search</button>
           </div>
         </div>
-          <p class ="block notification is-italic"> Don't know what to search? Generate a random word</p>
+          <p class ="schemedark block notification is-italic"> Don't know what to search? Generate a random word</p>
           <button class="button is-dark" id="random-button">
             Generate Random Word
           </button>
         </div>
         <!-- Search Results Song List -->
-        <div class="column is-two-thirds" id="search-results">
+        <div class="column is-two-thirds my-3 box " id="search-results">
           Search Results will display here...
+          <article class="media box">
+            <figure class="media-left">
+              <p class="image is-64x64" id="albumArt">
+                <img src="https://bulma.io/images/placeholders/128x128.png">
+              </p>
+            </figure>
+            <div class="media-content">
+              <div class="content">
+                <p>
+                  <span class="title is-4 is-spaced" id="trackTitle">
+                    Track title
+                  </span>
+                  <span class="column subtitle is-7" id="artistName">
+                    Artist(s) name(s)
+                  </span>
+                </p>
+              </div>
+              
+            </div>
+            <div class="media-right">
+              <button class="delete"></button>
+            </div>
+          </article>
         </div>
+        
       </div>
     </div>
     <!-- Saved Tracks Container -->
-    <div class="container is-fluid" id="saved-tracks">
+    <div class="column is-two-thirds py-6 container is-fluid" id="saved-tracks">
       Saved Tracks will display here...
+      <article class="media box">
+        <figure class="media-left">
+          <p class="image is-128x128" id="albumArtSaved">
+            <img src="https://bulma.io/images/placeholders/128x128.png">
+          </p>
+        </figure>
+        <div class="media-content">
+          <div class="content">
+            <p>
+              <span class="title is-3" id="trackTitleSaved" >
+                Track title
+              </span>
+              <span class="column" id="artistNameSaved">
+                Artist(s) name(s)
+              </span>
+            </p>
+          </div>
+          
+        </div>
+        <div class="media-right">
+          <button class="delete"></button>
+        </div>
+      </article>
+        
+      </div>
     </div>
     <script src="./js/script.js"></script>
   </body>
