@@ -4,9 +4,12 @@
     --dark:  #333533;
     --light: #E8EDDF;
     --accent: #C492B1;
+    --puke: #9B8816;
+    --gray: #8E9189;
+    
 }
 
-* {
+html {
     background-color: var(--accent);
 }
 
@@ -16,24 +19,15 @@
     color: var(--light);
 }
 
-.title {
+.schemedark{
     background-color: var(--dark);
     color: var(--light);
 }
 
-.subtitle {
-    background-color: var(--dark);
-    color: var(--light);
-}
+
 
 
 /* directions container */
-
-.notification {
-    background-color: var(--dark);
-    color: var(--light);
-}
-
 
 
 /* Seach bar  */
@@ -52,11 +46,19 @@
 
 /* Search results container */
 #search-results {
-
+    background-color: var(--dark);
+    color: var(--light);
+   
 }
 
 /* saved results container */
 #saved-tracks {
+    background-color: var(--dark);
+    color: var(--light);
 
 }
+
+
+
+
 
