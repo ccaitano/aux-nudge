@@ -35,6 +35,7 @@ var randomButtonEl = document.getElementById("random-button");
 randomButtonEl.addEventListener("click", getRandomWord);
 
 let searchTerm = '';
+let hitsObj = [];
 
 // Replaces spaces in search term with "%20" for url
 function cleanSearchTerm() {
@@ -46,16 +47,63 @@ function cleanSearchTerm() {
 function runSearch() {
 	cleanSearchTerm();
 	// Add search term from #search-bar into url for search
-	fetch(`https://genius-song-lyrics1.p.rapidapi.com/search?q=${searchTerm}&per_page=10&page=1`, options)
+	fetch(`https://genius-song-lyrics1.p.rapidapi.com/search?q=${searchTerm}&per_page=5&page=1`, options)
 		.then(response => response.json())
 		.then(function (data){
-			console.log(data);
-			searchDomain = data.response.hits[0].result.title;
-			console.log(searchDomain);
-			console.log('test');
+			hitsObj = data.response.hits;
+			console.log(hitsObj);
+			console.log('searched');
+			// clears the search results placeholder
+			document.getElementById('search-results').innerHTML = '';
+			renderSearch();
+			console.log('rendered');
+			// cycle through the first 5 songs and do this function
+				// write the title in titleEl
+				// write artist name in artistEl
+				// render cover art into placeholderEl
+				//render save button 
 		})
 		.catch(err => console.error(err));
-	
+}
+
+let albumArtEl = document.getElementById('albumArt');
+let trackTitleEl = document.getElementById('trackTitle');
+let artistNameEl = document.getElementById('artistName');
+
+
+function renderSearch() {
+	for (let i = 0; i < hitsObj.length; i++) {
+		let relativeAlbumArt = hitsObj[i].result.song_art_image_thumbnail_url;
+		let relativeTrackTitle = hitsObj[i].result.title_with_featured;
+		let relativeArtistName = hitsObj[i].result.artist_names;
+		// append a new article element with all of the other html elements inside of it in the following template literal
+		let searchResultsEl = document.createElement('article');
+		searchResultsEl.setAttribute('class', 'media box');
+		searchResultsEl.innerHTML = `
+			<figure class="media-left">
+				<p class="image is-64x64" id="albumArt">
+				<img src="${relativeAlbumArt}">
+				</p>
+			</figure>
+			<div class="media-content">
+				<div class="content">
+				<p>
+					<span class="title is-4 is-spaced" id="trackTitle">
+					${relativeTrackTitle}
+					</span>
+					<span class="column subtitle is-7" id="artistName">
+					${relativeArtistName}
+					</span>
+				</p>
+				</div>
+				
+			</div>
+			<div class="media-right">
+				<button class="delete"></button>
+			</div>
+		`
+		document.getElementById('search-results').appendChild(searchResultsEl);
+	}
 }
 
 // Run search when search is clicked
