@@ -145,10 +145,40 @@ document.addEventListener('DOMContentLoaded', () => {
 		
 		console.log(searchObjects[songIndex]);
 		openModal($target);
+		// function createYoutubeLink() {
+		// 	searchTerm = searchBarEl.value.replace(/ /g, "%20");
+		// };
+		// createYoutubeLink()
+		let youtubeURL = `https://www.youtube.com/results?search_query=${searchObjects[songIndex].ArtistName}+${searchObjects[songIndex].TrackTitle}`;
+		var modalTemplateEl = document.getElementById('modal-content');
+		modalTemplateEl.innerHTML = '';
 		var modalContentEl = document.createElement('div');
-		
 		modalContentEl.innerHTML = `
-			<h3></h3>
+		<div class="columns">
+			<!-- Modal Song info -->
+			<div class="column is-one-third">
+				<div class="content">
+					<p>
+						<span class="title is-4 is-spaced" id="trackTitle">
+						${searchObjects[songIndex].TrackTitle}
+						</span>
+						<span class="column subtitle is-7" id="artistName">
+						${searchObjects[songIndex].ArtistName}
+						</span>
+						<span id='playerLink'>
+						<a id='youtubeLink' href='${youtubeURL}' target="_blank"
+						>Listen to <strong>${searchObjects[songIndex].TrackTitle}</strong> by <strong>${searchObjects[songIndex].ArtistName}</strong> on Youtube</a>
+						</span>
+					</p>
+				</div>
+			</div>
+			<!-- Album Art -->
+			<div class="column is-two-thirds" id="modalAlbumArt">
+				<p class="image is-64x64" id="albumArt">
+					<img src="${searchObjects[songIndex].AlbumArt}">
+				</p>
+			</div>
+      </div>
 		`
 
 		$('#modal-content').append(modalContentEl);
