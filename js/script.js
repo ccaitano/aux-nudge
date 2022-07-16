@@ -38,6 +38,7 @@ randomButtonEl.addEventListener("click", getRandomWord);
 
 let searchTerm = '';
 let hitsObj = [];
+let searchObjects = [];
 
 // Replaces spaces in search term with "%20" for url
 function cleanSearchTerm() {
@@ -78,11 +79,16 @@ function renderSearch() {
 		let relativeAlbumArt = hitsObj[i].result.song_art_image_thumbnail_url;
 		let relativeTrackTitle = hitsObj[i].result.title_with_featured;
 		let relativeArtistName = hitsObj[i].result.artist_names;
+
+		searchObjects[i] = {'AlbumArt': relativeAlbumArt, 'TrackTitle': relativeTrackTitle, 'ArtistName': relativeArtistName};
+
+	
 		// append a new article element with all of the other html elements inside of it in the following template literal
 		let searchResultsEl = document.createElement('article');
-		searchResultsEl.setAttribute('', 'relativeSong-${i}');
 		searchResultsEl.setAttribute('class', 'media box js-modal-trigger');
 		searchResultsEl.setAttribute('data-target', 'modal-js-example');
+		searchResultsEl.setAttribute('data-search', i);
+
 		searchResultsEl.innerHTML = `
 			<figure class="media-left">
 				<p class="image is-64x64" id="albumArt">
@@ -104,13 +110,11 @@ function renderSearch() {
 			</div>
 			<div class="media-right">
 				<button class="delete"></button>
-				<button class="js-modal-trigger" data-target="modal-js-example">
-  Open JS example modal
-</button>
 			</div>
 		`
 		document.getElementById('search-results').appendChild(searchResultsEl);
 	}
+	console.log(searchObjects);
 }
 
 // Run search when search is clicked
@@ -136,8 +140,18 @@ document.addEventListener('DOMContentLoaded', () => {
     $('body').on('click', '.js-modal-trigger',function(){
 		const modal = this.dataset.target;
 		const $target = document.getElementById(modal);
-		console.log(modal,$target);
+		
+		var songIndex = this.dataset.search;
+		
+		console.log(searchObjects[songIndex]);
 		openModal($target);
+		var modalContentEl = document.createElement('div');
+		
+		modalContentEl.innerHTML = `
+			<h3></h3>
+		`
+
+		$('#modal-content').append(modalContentEl);
 	});
 
 
