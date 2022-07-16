@@ -34,15 +34,22 @@ function getRandomWord() {
 var randomButtonEl = document.getElementById("random-button");
 randomButtonEl.addEventListener("click", getRandomWord);
 
-var searchTerm = searchBarEl.value
-//Must convert spaces in searchTerm to "%20" to create a valid url
+let searchTerm = '';
+
+// Replaces spaces in search term with "%20" for url
+function cleanSearchTerm() {
+	searchTerm = searchBarEl.value.replace(/ /g, "%20");
+	console.log('cleaned search term: ' + searchTerm)
+}
 
 //Search for Songs and Display Results
-function searchWord() {
+function runSearch() {
+	cleanSearchTerm();
 	// Add search term from #search-bar into url for search
 	fetch(`https://genius-song-lyrics1.p.rapidapi.com/search?q=${searchTerm}&per_page=10&page=1`, options)
 		.then(response => response.json())
 		.then(function (data){
+			console.log(data);
 			searchDomain = data.response.hits[0].result.title;
 			console.log(searchDomain);
 			console.log('test');
@@ -51,7 +58,9 @@ function searchWord() {
 	
 }
 
-searchWord();
+// Run search when search is clicked
+let searchButtonEl = document.getElementById("search-button");
+searchButtonEl.addEventListener('click', runSearch);
 
 //Open Modal
 
