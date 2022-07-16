@@ -1,3 +1,5 @@
+
+
 // Genius Lyrics API
 const options = {
 	method: 'GET',
@@ -78,7 +80,9 @@ function renderSearch() {
 		let relativeArtistName = hitsObj[i].result.artist_names;
 		// append a new article element with all of the other html elements inside of it in the following template literal
 		let searchResultsEl = document.createElement('article');
-		searchResultsEl.setAttribute('class', 'media box');
+		searchResultsEl.setAttribute('', 'relativeSong-${i}');
+		searchResultsEl.setAttribute('class', 'media box js-modal-trigger');
+		searchResultsEl.setAttribute('data-target', 'modal-js-example');
 		searchResultsEl.innerHTML = `
 			<figure class="media-left">
 				<p class="image is-64x64" id="albumArt">
@@ -100,6 +104,9 @@ function renderSearch() {
 			</div>
 			<div class="media-right">
 				<button class="delete"></button>
+				<button class="js-modal-trigger" data-target="modal-js-example">
+  Open JS example modal
+</button>
 			</div>
 		`
 		document.getElementById('search-results').appendChild(searchResultsEl);
@@ -111,7 +118,57 @@ let searchButtonEl = document.getElementById("search-button");
 searchButtonEl.addEventListener('click', runSearch);
 
 //Open Modal
+document.addEventListener('DOMContentLoaded', () => {
+	// Functions to open and close a modal
+	function openModal($el) {
+	  $el.classList.add('is-active');
+	}
+  
+	function closeModal($el) {
+	  $el.classList.remove('is-active');
+	}
+  
+	function closeAllModals() {
+	  (document.querySelectorAll('.modal') || []).forEach(($modal) => {
+		closeModal($modal);
+	  });
+	}
+    $('body').on('click', '.js-modal-trigger',function(){
+		const modal = this.dataset.target;
+		const $target = document.getElementById(modal);
+		console.log(modal,$target);
+		openModal($target);
+	});
 
+
+	// Add a click event on buttons to open a specific modal
+	// (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
+	//   const modal = $trigger.dataset.target;
+	//   const $target = document.getElementById(modal);
+  
+	//   $trigger.addEventListener('click', () => {
+	// 	openModal($target);
+	//   });
+	// });
+  
+	// Add a click event on various child elements to close the parent modal
+	(document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
+	  const $target = $close.closest('.modal');
+  
+	  $close.addEventListener('click', () => {
+		closeModal($target);
+	  });
+	});
+  
+	// Add a keyboard event to close all modals
+	document.addEventListener('keydown', (event) => {
+	  const e = event || window.event;
+  
+	  if (e.keyCode === 27) { // Escape key
+		closeAllModals();
+	  }
+	});
+  });
 	//YouTube URL search link
 
 //Save Tracks
