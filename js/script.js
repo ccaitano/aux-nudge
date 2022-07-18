@@ -75,6 +75,15 @@ let artistNameEl = document.getElementById('artistName');
 
 
 function renderSearch() {
+	//Displays "No Search Results" when no objects return from Genius Lyrics API
+	if (hitsObj.length == 0) {
+		var noResultsEl = document.createElement("div");
+		noResultsEl.innerHTML = `
+			<p class="has-text-light is-size-1 has-text-centered">No Search Results</p>
+		`
+		document.getElementById('search-results').appendChild(noResultsEl);
+		return;
+	}
 	for (let i = 0; i < hitsObj.length; i++) {
 		let relativeAlbumArt = hitsObj[i].result.song_art_image_thumbnail_url;
 		let relativeTrackTitle = hitsObj[i].result.title_with_featured;
@@ -88,7 +97,7 @@ function renderSearch() {
 		searchResultsEl.setAttribute('class', 'media box js-modal-trigger');
 		searchResultsEl.setAttribute('data-target', 'modal-js-example');
 		searchResultsEl.setAttribute('data-search', i);
-
+		console.log(hitsObj.length);
 		searchResultsEl.innerHTML = `
 			<figure class="media-left">
 				<p class="image is-64x64" id="albumArt">
