@@ -40,6 +40,7 @@ let searchTerm = '';
 let hitsObj = [];
 let searchObjects = [];
 let savedObjects = [];
+
 //getSavedTracks();
 //document.addEventListener('DOMContentLoaded',getSavedTracks());
 
@@ -184,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			</div>
 			<!-- Album Art -->
 
-			<div class="column is-two-thirds" id="modalAlbumArt">
+			<div class="column is-one-third" id="modalAlbumArt">
 				<p class="image is-128x128" id="albumArt">
 
 					<img src="${searchObjects[songIndex].AlbumArt}">
@@ -203,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		var button = $("#saveBtn");
 
 		button.on("click", function() {
-			console.log(searchObjects[songIndex]);
+			console.log(savedObjects);
 			savedObjects.push(searchObjects[songIndex]);
 			localStorage.setItem("save-tracks",JSON.stringify(savedObjects));
 
@@ -245,24 +246,24 @@ document.addEventListener('DOMContentLoaded', () => {
 	//YouTube URL search link
 
 //Save Tracks
-//document.addEventListener('DOMContentLoaded',getSavedTracks());
 getSavedTracks();
 
 function getSavedTracks (){
-	savedObjects = JSON.parse(localStorage.getItem("save-tracks"));
-
-	document.getElementById('saved-tracks').innerHTML='';
-
+	//Checks for Previously Saved Tracks in Local Storage
+	savedObjects = localStorage.getItem('save-tracks');
+	if (savedObjects) {
+		savedObjects = JSON.parse(savedObjects);
+	}
+	document.getElementById('saved-tracks').innerHTML='<p class="is-italic is-size-3 is-underlined has-text-centered">Saved Tracks</p>';
+	console.log(savedObjects);
+	if (savedObjects == null) {
+		return;
+	}
 
 	for (let i = 0; i < savedObjects.length; i++) {
 		let relativeAlbumArt = savedObjects[i].AlbumArt;
 		let relativeTrackTitle = savedObjects[i].TrackTitle;
 		let relativeArtistName = savedObjects[i].ArtistName;
-
-		
-
-		//searchObjects[i] = {'AlbumArt': relativeAlbumArt, 'TrackTitle': relativeTrackTitle, 'ArtistName': relativeArtistName};
-
 	
 		// append a new article element with all of the other html elements inside of it in the following template literal
 		let savedResultsEl = document.createElement('article');
@@ -291,7 +292,6 @@ function getSavedTracks (){
 			</div>
 			
 		`
-		//document.getElementById('saved-tracks').innerHTML='';
 		document.getElementById('saved-tracks').appendChild(savedResultsEl);
 	}
 	console.log(savedObjects);
