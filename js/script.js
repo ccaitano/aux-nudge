@@ -103,7 +103,7 @@ function renderSearch() {
 		console.log(hitsObj.length);
 		searchResultsEl.innerHTML = `
 			<figure class="media-left">
-				<p class="image is-64x64" id="albumArt">
+				<p class="image is-128x128" id="albumArt">
 				<img src="${relativeAlbumArt}">
 				</p>
 			</figure>
@@ -183,8 +183,10 @@ document.addEventListener('DOMContentLoaded', () => {
 				</div>
 			</div>
 			<!-- Album Art -->
-			<div class="column is-one-third" id="modalAlbumArt">
-				<p class="image is-64x64" id="albumArt">
+
+			<div class="column is-two-thirds" id="modalAlbumArt">
+				<p class="image is-128x128" id="albumArt">
+
 					<img src="${searchObjects[songIndex].AlbumArt}">
 				</p>
 			</div>
