@@ -39,6 +39,7 @@ randomButtonEl.addEventListener("click", getRandomWord);
 let searchTerm = '';
 let hitsObj = [];
 let searchObjects = [];
+let savedObjects = [];
 
 // Replaces spaces in search term with "%20" for url
 function cleanSearchTerm() {
@@ -117,9 +118,7 @@ function renderSearch() {
 				</div>
 				
 			</div>
-			<div class="media-right">
-				<button class="delete"></button>
-			</div>
+			
 		`
 		document.getElementById('search-results').appendChild(searchResultsEl);
 	}
@@ -182,18 +181,33 @@ document.addEventListener('DOMContentLoaded', () => {
 				</div>
 			</div>
 			<!-- Album Art -->
-			<div class="column is-two-thirds" id="modalAlbumArt">
+			<div class="column is-one-third" id="modalAlbumArt">
 				<p class="image is-64x64" id="albumArt">
 					<img src="${searchObjects[songIndex].AlbumArt}">
 				</p>
 			</div>
+			<div class="column is-one-third">
+				<button class="button is-dark" id = "saveBtn">SAVE</button>
+			</div>
       </div>
 		`
 
+		
+
 		$('#modal-content').append(modalContentEl);
+
+		var button = $("#saveBtn");
+
+		button.on("click", function() {
+			console.log(searchObjects[songIndex]);
+			savedObjects.push(searchObjects[songIndex]);
+			localStorage.setItem("save-tracks",JSON.stringify(savedObjects));
+		});
+
 	});
 
-
+	function getSavedTracks ()
+	
 	// Add a click event on buttons to open a specific modal
 	// (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
 	//   const modal = $trigger.dataset.target;
