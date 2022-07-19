@@ -210,55 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
 	});
 
-	function getSavedTracks (){
-		savedObjects = JSON.parse(localStorage.getItem("save-tracks"));
-
-		document.getElementById('saved-tracks').innerHTML='';
-
-
-		for (let i = 0; i < savedObjects.length; i++) {
-			let relativeAlbumArt = savedObjects[i].AlbumArt;
-			let relativeTrackTitle = savedObjects[i].TrackTitle;
-			let relativeArtistName = savedObjects[i].ArtistName;
-
-			
 	
-			//searchObjects[i] = {'AlbumArt': relativeAlbumArt, 'TrackTitle': relativeTrackTitle, 'ArtistName': relativeArtistName};
-	
-		
-			// append a new article element with all of the other html elements inside of it in the following template literal
-			let savedResultsEl = document.createElement('article');
-			savedResultsEl.setAttribute('class', 'media box js-modal-trigger');
-			savedResultsEl.setAttribute('data-target', 'modal-js-example');
-			savedResultsEl.setAttribute('data-search', i);
-			console.log(savedObjects.length);
-			savedResultsEl.innerHTML = `
-				<figure class="media-left">
-					<p class="image is-64x64" id="albumArt">
-					<img src="${relativeAlbumArt}">
-					</p>
-				</figure>
-				<div class="media-content">
-					<div class="content">
-					<p>
-						<span class="title is-4 is-spaced" id="trackTitle">
-						${relativeTrackTitle}
-						</span>
-						<span class="column subtitle is-7" id="artistName">
-						${relativeArtistName}
-						</span>
-					</p>
-					</div>
-					
-				</div>
-				
-			`
-			//document.getElementById('saved-tracks').innerHTML='';
-			document.getElementById('saved-tracks').appendChild(savedResultsEl);
-		}
-		console.log(savedObjects);
-	}
-
 	
 	// Add a click event on buttons to open a specific modal
 	// (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
@@ -293,3 +245,52 @@ document.addEventListener('DOMContentLoaded', () => {
 //Save Tracks
 //document.addEventListener('DOMContentLoaded',getSavedTracks());
 getSavedTracks();
+
+function getSavedTracks (){
+	savedObjects = JSON.parse(localStorage.getItem("save-tracks"));
+
+	document.getElementById('saved-tracks').innerHTML='';
+
+
+	for (let i = 0; i < savedObjects.length; i++) {
+		let relativeAlbumArt = savedObjects[i].AlbumArt;
+		let relativeTrackTitle = savedObjects[i].TrackTitle;
+		let relativeArtistName = savedObjects[i].ArtistName;
+
+		
+
+		//searchObjects[i] = {'AlbumArt': relativeAlbumArt, 'TrackTitle': relativeTrackTitle, 'ArtistName': relativeArtistName};
+
+	
+		// append a new article element with all of the other html elements inside of it in the following template literal
+		let savedResultsEl = document.createElement('article');
+		savedResultsEl.setAttribute('class', 'media box js-modal-trigger');
+		savedResultsEl.setAttribute('data-target', 'modal-js-example');
+		savedResultsEl.setAttribute('data-search', i);
+		console.log(savedObjects.length);
+		savedResultsEl.innerHTML = `
+			<figure class="media-left">
+				<p class="image is-64x64" id="albumArt">
+				<img src="${relativeAlbumArt}">
+				</p>
+			</figure>
+			<div class="media-content">
+				<div class="content">
+				<p>
+					<span class="title is-4 is-spaced" id="trackTitle">
+					${relativeTrackTitle}
+					</span>
+					<span class="column subtitle is-7" id="artistName">
+					${relativeArtistName}
+					</span>
+				</p>
+				</div>
+				
+			</div>
+			
+		`
+		//document.getElementById('saved-tracks').innerHTML='';
+		document.getElementById('saved-tracks').appendChild(savedResultsEl);
+	}
+	console.log(savedObjects);
+}
