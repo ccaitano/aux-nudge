@@ -39,6 +39,9 @@ randomButtonEl.addEventListener("click", getRandomWord);
 let searchTerm = '';
 let hitsObj = [];
 let searchObjects = [];
+let savedObjects = [];
+//getSavedTracks();
+//document.addEventListener('DOMContentLoaded',getSavedTracks());
 
 // Replaces spaces in search term with "%20" for url
 function cleanSearchTerm() {
@@ -75,6 +78,15 @@ let artistNameEl = document.getElementById('artistName');
 
 
 function renderSearch() {
+	//Displays "No Search Results" when no objects return from Genius Lyrics API
+	if (hitsObj.length == 0) {
+		var noResultsEl = document.createElement("div");
+		noResultsEl.innerHTML = `
+			<p class="has-text-light is-size-1 has-text-centered">No Search Results</p>
+		`
+		document.getElementById('search-results').appendChild(noResultsEl);
+		return;
+	}
 	for (let i = 0; i < hitsObj.length; i++) {
 		let relativeAlbumArt = hitsObj[i].result.song_art_image_thumbnail_url;
 		let relativeTrackTitle = hitsObj[i].result.title_with_featured;
@@ -88,7 +100,7 @@ function renderSearch() {
 		searchResultsEl.setAttribute('class', 'media box js-modal-trigger');
 		searchResultsEl.setAttribute('data-target', 'modal-js-example');
 		searchResultsEl.setAttribute('data-search', i);
-
+		console.log(hitsObj.length);
 		searchResultsEl.innerHTML = `
 			<figure class="media-left">
 				<p class="image is-128x128" id="albumArt">
@@ -108,9 +120,7 @@ function renderSearch() {
 				</div>
 				
 			</div>
-			<div class="media-right">
-				<button class="delete"></button>
-			</div>
+			
 		`
 		document.getElementById('search-results').appendChild(searchResultsEl);
 	}
@@ -173,18 +183,85 @@ document.addEventListener('DOMContentLoaded', () => {
 				</div>
 			</div>
 			<!-- Album Art -->
+
 			<div class="column is-two-thirds" id="modalAlbumArt">
 				<p class="image is-128x128" id="albumArt">
+
 					<img src="${searchObjects[songIndex].AlbumArt}">
 				</p>
+			</div>
+			<div class="column is-one-third">
+				<button class="button is-dark" id = "saveBtn">SAVE</button>
 			</div>
       </div>
 		`
 
+		
+
 		$('#modal-content').append(modalContentEl);
+
+		var button = $("#saveBtn");
+
+		button.on("click", function() {
+			console.log(searchObjects[songIndex]);
+			savedObjects.push(searchObjects[songIndex]);
+			localStorage.setItem("save-tracks",JSON.stringify(savedObjects));
+
+			getSavedTracks();
+		});
+  
 	});
 
+	function getSavedTracks (){
+		savedObjects = JSON.parse(localStorage.getItem("save-tracks"));
 
+		document.getElementById('saved-tracks').innerHTML='';
+
+
+		for (let i = 0; i < savedObjects.length; i++) {
+			let relativeAlbumArt = savedObjects[i].AlbumArt;
+			let relativeTrackTitle = savedObjects[i].TrackTitle;
+			let relativeArtistName = savedObjects[i].ArtistName;
+
+			
+	
+			//searchObjects[i] = {'AlbumArt': relativeAlbumArt, 'TrackTitle': relativeTrackTitle, 'ArtistName': relativeArtistName};
+	
+		
+			// append a new article element with all of the other html elements inside of it in the following template literal
+			let savedResultsEl = document.createElement('article');
+			savedResultsEl.setAttribute('class', 'media box js-modal-trigger');
+			savedResultsEl.setAttribute('data-target', 'modal-js-example');
+			savedResultsEl.setAttribute('data-search', i);
+			console.log(savedObjects.length);
+			savedResultsEl.innerHTML = `
+				<figure class="media-left">
+					<p class="image is-64x64" id="albumArt">
+					<img src="${relativeAlbumArt}">
+					</p>
+				</figure>
+				<div class="media-content">
+					<div class="content">
+					<p>
+						<span class="title is-4 is-spaced" id="trackTitle">
+						${relativeTrackTitle}
+						</span>
+						<span class="column subtitle is-7" id="artistName">
+						${relativeArtistName}
+						</span>
+					</p>
+					</div>
+					
+				</div>
+				
+			`
+			//document.getElementById('saved-tracks').innerHTML='';
+			document.getElementById('saved-tracks').appendChild(savedResultsEl);
+		}
+		console.log(savedObjects);
+	}
+
+	
 	// Add a click event on buttons to open a specific modal
 	// (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
 	//   const modal = $trigger.dataset.target;
@@ -216,3 +293,5 @@ document.addEventListener('DOMContentLoaded', () => {
 	//YouTube URL search link
 
 //Save Tracks
+//document.addEventListener('DOMContentLoaded',getSavedTracks());
+getSavedTracks();
