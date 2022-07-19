@@ -3,7 +3,7 @@
     --dark:  #333533;
     --light: #E8EDDF;
     --accent: #C492B1;
-    --puke: #9B8816;
+    --puke: #875a8d;
     --gray: #8E9189;
 }
 
@@ -14,7 +14,14 @@ html {
 /* Header Container */
 #header {
     background-color: var(--dark);
-    color: var(--light);
+    color: var(--light); 
+    font-family: 'Geo', sans-serif;
+    border-bottom-style: groove;
+    border-width: 20px;
+    border-color:var(--puke);
+    
+    
+
 }
 
 .schemedark{
@@ -30,9 +37,22 @@ html {
 
 /* Seach bar  */
 #search-bar {
-
+    display:flex;
+    min-width:100%;
+    width:100%;
 }
-
+.notification{
+    border-color: #875a8d;
+    border-width: 6px;
+    border-style: solid;
+    border-radius: 12px;
+}
+.input{
+   margin:0 0 ;
+    width:100%; 
+    border-style:solid ;
+    border-width:3px;
+}
 #search-button {
 
 }
@@ -46,6 +66,10 @@ html {
 #search-results {
     background-color: var(--dark);
     color: var(--light);
+    border-color: #875a8d;
+    border-width: 6px;
+    border-style: solid;
+    border-radius: 12px;
    
 }
 
@@ -53,6 +77,10 @@ html {
 #saved-tracks {
     background-color: var(--dark);
     color: var(--light);
+    border-color: #875a8d;
+    border-width: 6px;
+    border-style: solid;
+    border-radius: 12px;
 
 }
 
