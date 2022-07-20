@@ -1,5 +1,3 @@
-
-
 // Genius Lyrics API
 const options = {
 	method: 'GET',
@@ -21,7 +19,7 @@ const options2 = {
 // Store search bar input in searchBarEl
 var searchBarEl = document.getElementById("search-bar");
 
-//Get Random Word
+//Get Random Word Function
 function getRandomWord() {
 	fetch('https://wordsapiv1.p.rapidapi.com/words/?random=true', options2)
 		.then(response => response.json())
@@ -33,15 +31,19 @@ function getRandomWord() {
 		.catch(err => console.error(err));
 	
 }
+
+//Listener for Generate Random Word Function
 var randomButtonEl = document.getElementById("random-button");
 randomButtonEl.addEventListener("click", getRandomWord);
 
+//Declare Global Variables
 let searchTerm = '';
 let hitsObj = [];
 let searchObjects = [];
-let savedObjects = [];
-//getSavedTracks();
-//document.addEventListener('DOMContentLoaded',getSavedTracks());
+let savedObjects = JSON.parse(localStorage.getItem('save-tracks'));
+let albumArtEl = document.getElementById('albumArt');
+let trackTitleEl = document.getElementById('trackTitle');
+let artistNameEl = document.getElementById('artistName');
 
 // Replaces spaces in search term with "%20" for url
 function cleanSearchTerm() {
@@ -49,7 +51,7 @@ function cleanSearchTerm() {
 	console.log('cleaned search term: ' + searchTerm)
 }
 
-//Search for Songs and Display Results
+//Search for Songs using Genius API
 function runSearch() {
 	cleanSearchTerm();
 	// Add search term from #search-bar into url for search
@@ -72,11 +74,7 @@ function runSearch() {
 		.catch(err => console.error(err));
 }
 
-let albumArtEl = document.getElementById('albumArt');
-let trackTitleEl = document.getElementById('trackTitle');
-let artistNameEl = document.getElementById('artistName');
-
-
+//Display Search Results
 function renderSearch() {
 	//Displays "No Search Results" when no objects return from Genius Lyrics API
 	if (hitsObj.length == 0) {
@@ -155,10 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		
 		console.log(searchObjects[songIndex]);
 		openModal($target);
-		// function createYoutubeLink() {
-		// 	searchTerm = searchBarEl.value.replace(/ /g, "%20");
-		// };
-		// createYoutubeLink()
 		let youtubeURL = `https://www.youtube.com/results?search_query=${searchObjects[songIndex].ArtistName}+${searchObjects[songIndex].TrackTitle}`;
 		var modalTemplateEl = document.getElementById('modal-content');
 		modalTemplateEl.innerHTML = '';
@@ -184,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			</div>
 			<!-- Album Art -->
 
-			<div class="column is-two-thirds" id="modalAlbumArt">
+			<div class="column is-one-third" id="modalAlbumArt">
 				<p class="image is-128x128" id="albumArt">
 
 					<img src="${searchObjects[songIndex].AlbumArt}">
@@ -193,17 +187,15 @@ document.addEventListener('DOMContentLoaded', () => {
 			<div class="column is-one-third">
 				<button class="button is-dark" id = "saveBtn">SAVE</button>
 			</div>
-      </div>
+      	</div>
 		`
-
-		
-
 		$('#modal-content').append(modalContentEl);
 
 		var button = $("#saveBtn");
-
+		//Saves Track on Button Click
 		button.on("click", function() {
-			console.log(searchObjects[songIndex]);
+			console.log(savedObjects);
+			savedObjects = JSON.parse(localStorage.getItem('save-tracks'));
 			savedObjects.push(searchObjects[songIndex]);
 			localStorage.setItem("save-tracks",JSON.stringify(savedObjects));
 
@@ -212,18 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
   
 	});
 
-	
-	
-	// Add a click event on buttons to open a specific modal
-	// (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
-	//   const modal = $trigger.dataset.target;
-	//   const $target = document.getElementById(modal);
-  
-	//   $trigger.addEventListener('click', () => {
-	// 	openModal($target);
-	//   });
-	// });
-  
 	// Add a click event on various child elements to close the parent modal
 	(document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
 	  const $target = $close.closest('.modal');
@@ -242,27 +222,26 @@ document.addEventListener('DOMContentLoaded', () => {
 	  }
 	});
   });
-	//YouTube URL search link
 
-//Save Tracks
-//document.addEventListener('DOMContentLoaded',getSavedTracks());
 getSavedTracks();
 
 function getSavedTracks (){
-	savedObjects = JSON.parse(localStorage.getItem("save-tracks"));
+	//Checks for Previously Saved Tracks in Local Storage
+	if (localStorage.getItem('save-tracks') === null) {
+		console.log("No Tracks!");
+		localStorage.setItem('save-tracks', "[]");
+		return;
+	} else {
+		console.log("Saved Tracks!");
+		savedObjects = JSON.parse(localStorage.getItem('save-tracks'));
+	}
 
-	document.getElementById('saved-tracks').innerHTML='';
-
-
+	document.getElementById('saved-tracks').innerHTML='<p class="is-italic is-size-3 is-underlined has-text-centered">Saved Tracks</p>';
+	console.log(savedObjects);
 	for (let i = 0; i < savedObjects.length; i++) {
 		let relativeAlbumArt = savedObjects[i].AlbumArt;
 		let relativeTrackTitle = savedObjects[i].TrackTitle;
 		let relativeArtistName = savedObjects[i].ArtistName;
-
-		
-
-		//searchObjects[i] = {'AlbumArt': relativeAlbumArt, 'TrackTitle': relativeTrackTitle, 'ArtistName': relativeArtistName};
-
 	
 		// append a new article element with all of the other html elements inside of it in the following template literal
 		let savedResultsEl = document.createElement('article');
@@ -291,7 +270,6 @@ function getSavedTracks (){
 			</div>
 			
 		`
-		//document.getElementById('saved-tracks').innerHTML='';
 		document.getElementById('saved-tracks').appendChild(savedResultsEl);
 	}
 	console.log(savedObjects);
