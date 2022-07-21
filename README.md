@@ -13,7 +13,7 @@ Cheryl Caitano - [github](https://github.com/ccaitano) - cheryl.caitano@gmail.co
 Junghan Seo - [github](https://github.com/junghan84) - Junghanseo84@gmail.com <br>
 Andrew Cha - [github](https://github.com/Jinnywoo) - jinwoo2639@gmail.com <br>
 
-## [Deployed Page](https://best-book-search-google.herokuapp.com/)
+## [Deployed Page](https://ccaitano.github.io/aux-nudge/)
 
 
 ## [GitHub Repo](https://github.com/ccaitano/aux-nudge)
@@ -34,10 +34,53 @@ A web application that allows the user to search for songs based on a keyword or
 **Words API** - An API for the English Language that finds definitions, related words, and more. <br>
 **Genius Lyrics API** - An API that searches genius.com (a pop music wiki) for song information such as track titles, artist names, album names, links to lyrics, etc. <br>
 
+<br>
 
-## Basic UI
+## Landing Page
 
-[![image](https://user-images.githubusercontent.com/92805933/162827426-1261cab8-17b4-440e-aa67-24b4a2ccc77d.png)](https://github.com/kimberlym4488/best-book-search/issues/1)
+![image](./assets/media/screen-grab_search_page.PNG)
+
+<br>
+
+## *Example:* Nostalgic Graduation Playlist
+
+![image](./assets/media/screen-grab_search_results_wide.PNG)
+
+<br>
+
+### Search Results
+
+![image](./assets/media/screen-grab_search_results_continued.PNG)
+
+<br>
+
+### More Info Modal
+
+![image](./assets/media/screen-grab_more_info_modal.PNG)
+
+<br>
+
+### Youtube Search Link
+
+![image](./assets/media/screen-grab_youtube_search_tab.PNG)
+
+<br>
+
+### Saved Tracks List
+
+![image](./assets/media/screen-grab_saved_tracks_list.PNG)
+
+<br>
+
+## Random Word Button Example
+
+![image](./assets/media/screen-grab_random_word.PNG)
+
+<br>
+
+### Random Word Search Results
+
+![image](./assets/media/screen-grab_random_word_results.PNG)
 
 <br>
 
